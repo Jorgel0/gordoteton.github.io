@@ -185,3 +185,71 @@ footer {
     text-decoration: none;
     margin: 0 10px;
 }
+
+
+/* Estilos para el efecto de revelado al hacer scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cursor parpadeante para el efecto de escritura */
+#typing-text::after {
+    content: "|";
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+/* --- AJUSTE PARA MÓVILES (CORREGIDO) --- */
+@media (max-width: 600px) {
+    /* Reducimos el relleno lateral del header para ganar espacio */
+    header {
+        padding: 10px 5%; 
+    }
+
+    /* Hacemos que el logo y el menú se pongan uno sobre otro */
+    nav {
+        flex-direction: column;
+        gap: 10px; /* Espacio entre el logo y los enlaces */
+    }
+
+    /* Quitamos el margen lateral de la lista y la centramos */
+    nav ul {
+        padding: 0;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Reducimos el espacio entre los enlaces para que quepan en una fila */
+    nav ul li {
+        margin: 0 8px; /* Espacio pequeño a los lados de cada palabra */
+    }
+
+    nav ul li a {
+        font-size: 0.8rem; /* Letra un pelín más pequeña */
+    }
+
+    /* Ajustes extras para el resto de la página en móvil */
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .container {
+        padding: 60px 5%;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+}
