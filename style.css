@@ -7,10 +7,11 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #423f3f;
+    background-color: #383636; 
     color: #ffffff;
     line-height: 1.6;
     scroll-behavior: smooth;
+    overflow-x: hidden; 
 }
 
 .container {
@@ -27,17 +28,25 @@ h2 {
 
 /* Navegación */
 header {
-    background: #222423;
-    padding: 20px 10%;
+    background: rgba(34, 36, 35, 0.95);
+    padding: 15px 5%;
     position: fixed;
     width: 100%;
     z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    height: 40px;
+    width: auto;
 }
 
 nav ul {
@@ -53,44 +62,52 @@ nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ff3e3e;
 }
 
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url() no-repeat center center/cover; /* URL DE IMAGEN */ 
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('tu-imagen-fondo.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 0 20px;
 }
 
-.hero h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
+.hero-logo {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 20px;
 }
 
 .btn {
     display: inline-block;
     background: #ff3e3e;
     color: white;
-    padding: 12px 30px;
+    padding: 15px 40px;
     text-decoration: none;
-    margin-top: 20px;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 50px; /* Bordes más redondeados */
     transition: 0.3s;
+    text-transform: uppercase;
 }
 
 .btn:hover {
     background: #c22d2d;
+    transform: scale(1.05);
 }
 
 /* Tabla de Gira */
 .tour-section {
-    background: #1a1a1a;
+    background: #111;
 }
 
 .tour-table {
@@ -101,19 +118,31 @@ nav ul li a {
 
 .tour-table td {
     padding: 20px;
-    border-bottom: 1px solid #423f3f;
+    border-bottom: 1px solid #333;
 }
 
 .btn-small {
     background: transparent;
     border: 1px solid #ff3e3e;
     color: #ff3e3e;
-    padding: 5px 15px;
+    padding: 8px 15px;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    display: inline-block;
+    transition: 0.3s;
 }
 
-/* Contenedor para centrar el álbum único */
+.btn-small:hover {
+    background: #ff3e3e;
+    color: white;
+}
+
+.sold-out {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Album Section */
 .album-single-centered {
     display: flex;
     justify-content: center;
@@ -122,58 +151,96 @@ nav ul li a {
 
 .album {
     width: 100%;
-    max-width: 600px; /* Ancho máximo del rectángulo */
+    max-width: 500px; 
 }
 
 .album-cover {
     width: 100%;
-    height: 300px; /* Altura fija para que sea rectangular */
-    background: #1a1a1a;
-    overflow: hidden; /* Corta lo que sobresalga */
+    aspect-ratio: 1/1; /* Mantiene el cuadrado perfecto */
+    background: #000;
     border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    transition: transform 0.3s;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    overflow: hidden;
 }
 
 .album-cover img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
-    display: block;
-}
-
-.album-cover:hover {
-    transform: scale(1.02);
+    object-fit: cover;
 }
 
 .album-title {
-    margin-top: 20px;
-    font-size: 1rem;
-    color: #eee;
+    margin-top: 25px;
+    font-size: 1.1rem;
 }
 
-/* --- Ajuste para Móviles --- */
-@media (max-width: 600px) {
-    .album-cover {
-        height: 200px; /* Un poco más bajo en móviles para que no ocupe toda la pantalla */
+/* ==========================================
+   MEDIA QUERIES (ESTO HACE QUE SEA MÓVIL)
+   ========================================== */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 60px 5%;
     }
-    
-    .album-title {
-        font-size: 0.9rem;
-        padding: 0 10px;
-    }
-    
+
     h2 {
         font-size: 1.8rem;
+    }
+
+    /* Navegación móvil simple */
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
+
+    /* Convertir Tabla en Tarjetas */
+    .tour-table, .tour-table tbody, .tour-table tr, .tour-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .tour-table tr {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #333;
+    }
+
+    .tour-table td {
+        border: none;
+        padding: 5px 0;
+        text-align: center;
+    }
+
+    .tour-table td.date {
+        font-weight: bold;
+        color: #ff3e3e;
+        font-size: 1.2rem;
+    }
+
+    .tour-table td.country {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Ajuste de Hero */
+    .hero-logo {
+        max-width: 90%;
+    }
+
+    .album-title {
+        font-size: 0.9rem;
     }
 }
 
 /* Footer */
 footer {
-    padding: 50px 10%;
+    padding: 40px 5%;
     background: #000;
     text-align: center;
-    font-size: 0.9rem;
 }
 
 .socials {
@@ -184,72 +251,5 @@ footer {
     color: #ff3e3e;
     text-decoration: none;
     margin: 0 10px;
-}
-
-
-/* Estilos para el efecto de revelado al hacer scroll */
-.reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s ease-out;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Cursor parpadeante para el efecto de escritura */
-#typing-text::after {
-    content: "|";
-    animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-
-/* --- AJUSTE PARA MÓVILES (CORREGIDO) --- */
-@media (max-width: 600px) {
-    /* Reducimos el relleno lateral del header para ganar espacio */
-    header {
-        padding: 10px 5%; 
-    }
-
-    /* Hacemos que el logo y el menú se pongan uno sobre otro */
-    nav {
-        flex-direction: column;
-        gap: 10px; /* Espacio entre el logo y los enlaces */
-    }
-
-    /* Quitamos el margen lateral de la lista y la centramos */
-    nav ul {
-        padding: 0;
-        justify-content: center;
-        width: 100%;
-    }
-
-    /* Reducimos el espacio entre los enlaces para que quepan en una fila */
-    nav ul li {
-        margin: 0 8px; /* Espacio pequeño a los lados de cada palabra */
-    }
-
-    nav ul li a {
-        font-size: 0.8rem; /* Letra un pelín más pequeña */
-    }
-
-    /* Ajustes extras para el resto de la página en móvil */
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-
-    .container {
-        padding: 60px 5%;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-    }
+    font-size: 1.2rem;
 }
